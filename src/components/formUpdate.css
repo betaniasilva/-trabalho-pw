@@ -1,0 +1,19 @@
+.form-container {
+  background-color: rgb(27, 86, 104);
+  padding: 32px;
+  border-radius: 8px;
+}
+
+form {
+  display: flex;
+  gap: 16px;
+  width: 75%;
+  min-width: 375px;
+  margin: 0 auto;
+
+  flex-direction: column;
+}
+
+form button {
+  padding: 16px 32px;
+}
