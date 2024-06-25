@@ -1,21 +1,10 @@
-import { useEffect } from "react";
-import "./formUpdate.css";
+import "./createForm.css";
 
 const categorias = ["Ação", "Terror", "RPG", "Aventura", "MMO"];
 
-const FormUpdate = ({atualizarJogo, form, items }) => {
+const FormCreate = ({onSubmit}) => {
   
-  const atualizar = form.handleSubmit((data) => {
-    atualizarJogo(data);
-  });
-
-  useEffect(() => {
-    form.reset({...items})
-
-    return ( ) => {
-      form.reset()
-    }
-  }, [])
+  
 
   return (
     <div className="form-container">
@@ -40,10 +29,10 @@ const FormUpdate = ({atualizarJogo, form, items }) => {
           {...form.register("descServ")}
         />
 
-        <button onClick={atualizar}>Atualizar</button>
+        <button onClick={onSubmit}>Criar</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default FormUpdate;
+export default FormCreate;

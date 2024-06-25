@@ -1,16 +1,16 @@
 import { useState } from "react";
-import Modal from "./Modal";
+import ModalForm from "./ModalForm";
 import "./listItems.css";
 import FormUpdate from "./FormUpdate";
 import Estrelas from "./Estrelas";
 
-const ListItems = ({ items, atualizarJogo }) => {
+const ListItems = ({ items, atualizarJogo, form }) => {
+  const [isOpen, setIsOpen] = useState({});
+  const [isOpenModalDelete, setIsOpenModalDelete] = useState({});
+
   return (
     <div className="listItems">
       {items.map((item, index) => {
-        const [isOpen, setIsOpen] = useState(false);
-        const [isOpenModalDelete, setIsOpenModalDelete] = useState(false);
-
         return (
           <div key={index} className="card">
             <img src={item.linkimg} alt="" />
@@ -22,22 +22,22 @@ const ListItems = ({ items, atualizarJogo }) => {
             </div>
             <div className="items-button">
               <div className="edit-item">
-                <Modal
+                <ModalForm
                   buttonText={"Editar"}
-                  isOpen={isOpen}
-                  setIsOpen={setIsOpen}
+                  isOpen={isOpen[index]}
+                  setIsOpen={() => setIsOpen({[index]: !isOpen[index] })}
                 >
-                  <FormUpdate items={item} atualizarJogo={atualizarJogo} />
-                </Modal>
+                  <FormUpdate items={item} form={form} atualizarJogo={atualizarJogo} />
+                </ModalForm>
               </div>
               <div className="edit-item">
-                <Modal
+                {/* <ModalForm
                   buttonText={"Deletar"}
-                  isOpen={isOpenModalDelete}
-                  setIsOpen={setIsOpenModalDelete}
+                  isOpen={isOpenModalDelete[index]}
+                  setIsOpen={() => setIsOpenModalDelete({[index]: !isOpenModalDelete[index] })}
                 >
                   <button onClick={() => deleteItem(item.id)}>Deletar</button>
-                </Modal>
+                </ModalForm> */}
                 <div>
                   <Estrelas num={items.nota} />
                   <p className="comentario">{items.comentario}</p>

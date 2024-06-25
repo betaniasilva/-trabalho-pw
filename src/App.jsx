@@ -3,7 +3,7 @@ import "./App.css";
 import ListItems from "./components/ListItems";
 import { useForm } from "react-hook-form";
 import FormCadastro from "./components/FormCadastro";
-import Modal from "./components/Modal";
+import ModalForm from "./components/ModalForm";
 import Header from "./components/Header";
 
 function App() {
@@ -51,15 +51,16 @@ function App() {
   }, []);
 
   const handleFilter = (e) => {
+    console.log(e.target.value)
     const inputValue = e.target.value.toLowerCase();
 
     if (inputValue?.length > 0) {
       const newData = items.filter(
         (item) =>
-          item.nome.toLowerCase().includes(inputValue) ||
-          item.descServ.toLowerCase().includes(inputValue) ||
-          item.valor.toLowerCase().includes(inputValue) ||
-          item.categorias.toLowerCase().includes(inputValue)
+          item?.nome?.toLowerCase()?.includes(inputValue) ||
+          item?.descServ?.toLowerCase()?.includes(inputValue) ||
+          item?.valor?.toLowerCase()?.includes(inputValue) ||
+          item?.categorias?.toLowerCase()?.includes(inputValue)
       );
       setItemsFiltered(newData);
     } else {
@@ -76,13 +77,14 @@ function App() {
           <div>
             <input type="text" placeholder="Buscar" onChange={handleFilter} />
           </div>
-          <Modal
+          <ModalForm
             buttonText={"Inserir um jogo"}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
+            onCloseModal={() => setIsOpen(false)}
           >
             <FormCadastro form={form} criarServico={inserirJogo} />
-          </Modal>
+          </ModalForm>
         </div>
         {itemsFiltered.length ? (
           <ListItems
